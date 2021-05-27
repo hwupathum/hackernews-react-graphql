@@ -5,7 +5,7 @@ import * as React from 'react';
 
 export function Footer(): JSX.Element {
   return (
-    <div style={{ width: '100%', marginLeft: -8, backgroundColor: '#6A7172', marginBottom: -12, padding: 8 }}>
+    <div style={{ width: '100%', marginLeft: -8, backgroundColor: '#6A7172', marginBottom: -12, padding: 8, paddingBottom: 12 }}>
       <br />
       <Grid container justify="center" spacing={2}>
         <Grid item>
@@ -47,30 +47,6 @@ export function Footer(): JSX.Element {
         </Grid>
         <Grid item>
           <a href="mailto:hn@ycombinator.com"><Typography color="secondary" variant="caption">Contact</Typography></a>
-        </Grid>
-        <Grid item xs={12}>
-          <form method="get" action="//hn.algolia.com/" style={{ marginBottom: '1em', textAlign: 'center' }}>
-            <TextField
-              type="text"
-              name="q"
-              style={{ backgroundColor: 'white', borderRadius: 4 }}
-              InputProps={{
-                startAdornment: <div style={{width: 12}}/>,
-                endAdornment:
-                  <>
-                    <Typography color="textSecondary" variant="caption">by</Typography>
-                    <img src="/static/algolia.png" style={{ height: 34, padding: 6 }} />
-                  </>
-              }}
-              placeholder="Search"
-              variant="standard"
-              // size="small"
-              autoCorrect="off"
-              spellCheck={false}
-              autoCapitalize="off"
-              autoComplete="false"
-            />
-          </form>
         </Grid>
       </Grid>
     </div>

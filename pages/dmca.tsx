@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import * as React from 'react';
+import { withData } from '../src/helpers/with-data';
 
 import { BlankLayout } from '../src/layouts/blank-layout';
 
@@ -25,9 +26,6 @@ const bSpanStyle = { fontSize: '13.5pt', fontFamily: 'Helvetica', color: '#44444
 export function DMCAPage(): JSX.Element {
   return (
     <BlankLayout>
-      <Head>
-        <link rel="stylesheet" type="text/css" href="/static/dmca.css" />
-      </Head>
       <p
         className="MsoNormal"
         style={{
@@ -190,4 +188,4 @@ export function DMCAPage(): JSX.Element {
   );
 }
 
-export default DMCAPage;
+export default withData(DMCAPage);

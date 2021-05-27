@@ -14,14 +14,14 @@ export function HeaderNav(props: IHeaderNavProps): JSX.Element {
     <>
       {userId && (
         <Link href="/newswelcome">
-          <Button variant='text' color='secondary' style={{ fontSize: '0.8rem' }}>Welcome</Button>
+          <Button variant='text' color='primary' style={{ fontSize: '0.8rem', fontWeight: 600 }}>Welcome</Button>
         </Link>
       )}
       <Link href="/newest">
         <Button
           variant='text'
-          color={currentUrl === '/newest' ? 'default' : 'secondary'}
-          style={{ fontSize: '0.8rem' }}
+          color={currentUrl === '/newest' ? 'default' : 'primary'}
+          style={{ fontSize: '0.8rem', fontWeight: 600 }}
         >
           new
         </Button>
@@ -30,8 +30,8 @@ export function HeaderNav(props: IHeaderNavProps): JSX.Element {
         <Link href={`/threads?id=${userId}`}>
           <Button
             variant='text'
-            color={currentUrl === '/threads' ? 'default' : 'secondary'}
-            style={{ fontSize: '0.8rem' }}
+            color={currentUrl === '/threads' ? 'default' : 'primary'}
+            style={{ fontSize: '0.8rem', fontWeight: 600 }}
           >
             threads
         </Button>
@@ -40,8 +40,8 @@ export function HeaderNav(props: IHeaderNavProps): JSX.Element {
       <Link href="/newcomments">
         <Button
           variant='text'
-          color={currentUrl === '/newcomments' ? 'default' : 'secondary'}
-          style={{ fontSize: '0.8rem' }}
+          color={currentUrl === '/newcomments' ? 'default' : 'primary'}
+          style={{ fontSize: '0.8rem', fontWeight: 600 }}
         >
           comments
         </Button>
@@ -49,8 +49,8 @@ export function HeaderNav(props: IHeaderNavProps): JSX.Element {
       <Link href="/show">
         <Button
           variant='text'
-          color={currentUrl === '/show' ? 'default' : 'secondary'}
-          style={{ fontSize: '0.8rem' }}
+          color={currentUrl === '/show' ? 'default' : 'primary'}
+          style={{ fontSize: '0.8rem', fontWeight: 600 }}
         >
           show
         </Button>
@@ -58,8 +58,8 @@ export function HeaderNav(props: IHeaderNavProps): JSX.Element {
       <Link href="/ask">
         <Button
           variant='text'
-          color={currentUrl === '/ask' ? 'default' : 'secondary'}
-          style={{ fontSize: '0.8rem' }}
+          color={currentUrl === '/ask' ? 'default' : 'primary'}
+          style={{ fontSize: '0.8rem', fontWeight: 600 }}
         >
           ask
         </Button>
@@ -67,8 +67,8 @@ export function HeaderNav(props: IHeaderNavProps): JSX.Element {
       <Link href="/jobs">
         <Button
           variant='text'
-          color={currentUrl === '/jobs' ? 'default' : 'secondary'}
-          style={{ fontSize: '0.8rem' }}
+          color={currentUrl === '/jobs' ? 'default' : 'primary'}
+          style={{ fontSize: '0.8rem', fontWeight: 600 }}
         >
           jobs
         </Button>
@@ -76,8 +76,8 @@ export function HeaderNav(props: IHeaderNavProps): JSX.Element {
       {userId && <Link href="/submit">
         <Button
           variant='text'
-          color={currentUrl === '/submit' ? 'default' : 'secondary'}
-          style={{ fontSize: '0.8rem' }}
+          color={currentUrl === '/submit' ? 'default' : 'primary'}
+          style={{ fontSize: '0.8rem', fontWeight: 600 }}
         >
           submit
         </Button>
@@ -87,7 +87,7 @@ export function HeaderNav(props: IHeaderNavProps): JSX.Element {
           <Button
             variant='text'
             color='default'
-            style={{ fontSize: '0.8rem' }}
+            style={{ fontSize: '0.8rem', fontWeight: 600 }}
           >
             best
         </Button>

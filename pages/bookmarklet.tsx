@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import * as React from 'react';
+import { withData } from '../src/helpers/with-data';
 
 import { NoticeLayout } from '../src/layouts/notice-layout';
 
@@ -48,4 +49,4 @@ export function BookmarkletPage(props): JSX.Element {
   );
 }
 
-export default BookmarkletPage;
+export default withData(BookmarkletPage);

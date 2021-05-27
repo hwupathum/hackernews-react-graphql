@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import * as React from 'react';
+import { withData } from '../src/helpers/with-data';
 
 import { NoticeLayout } from '../src/layouts/notice-layout';
 
@@ -81,4 +82,4 @@ export function ShowHNRulesPage(): JSX.Element {
   );
 }
 
-export default ShowHNRulesPage;
+export default withData(ShowHNRulesPage);

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import * as React from 'react';
+import { withData } from '../src/helpers/with-data';
 
 import { NoticeLayout } from '../src/layouts/notice-layout';
 
@@ -91,4 +92,4 @@ export function NewsWelcomePage(): JSX.Element {
   );
 }
 
-export default NewsWelcomePage;
+export default withData(NewsWelcomePage);
