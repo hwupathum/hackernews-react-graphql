@@ -5,6 +5,7 @@ import { useQuery } from '@apollo/client';
 import { Footer } from '../components/footer';
 import { Header } from '../components/header';
 import { IMeQuery, ME_QUERY } from '../data/queries/me-query';
+import { Container } from '@material-ui/core';
 
 interface IMainLayoutProps {
   children: React.ReactChild;
@@ -35,31 +36,17 @@ export function MainLayout(props: IMainLayoutProps): JSX.Element {
         <link rel="stylesheet" type="text/css" href="/static/news.css" />
         <link rel="shortcut icon" href="/static/favicon.ico" />
       </Head>
-      <table
-        id="hnmain"
-        style={{
-          backgroundColor: '#f6f6ef',
-          border: '0px',
-          borderCollapse: 'collapse',
-          borderSpacing: '0px',
-          marginLeft: 'auto',
-          marginRight: 'auto',
-          padding: '0px',
-          width: '85%',
-        }}
-      >
-        <tbody>
-          <Header
-            currentUrl={currentUrl}
-            isNavVisible={!!isNavVisible}
-            me={data?.me}
-            title={title!}
-          />
-          <tr style={{ height: '10px' }} />
-          {children}
-          {isFooterVisible && <Footer />}
-        </tbody>
-      </table>
+      <Header
+        currentUrl={currentUrl}
+        isNavVisible={!!isNavVisible}
+        me={data?.me}
+        title={title!}
+      />
+      <div style={{ height: '65px' }} />
+      <Container>
+        {children}
+      </Container>
+      {isFooterVisible && <Footer />}
     </div>
   );
 }

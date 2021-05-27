@@ -1,6 +1,9 @@
 import Link from 'next/link';
-import * as React from 'react';
-
+import React from 'react'
+import { AppBar, Grid, Typography, Toolbar, Button, Hidden, IconButton, Popover, Paper } from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import { HeaderNav } from './header-nav';
 
 export interface IHeaderProps {
@@ -12,14 +15,15 @@ export interface IHeaderProps {
 
 export function Header(props: IHeaderProps): JSX.Element {
   const { currentUrl, isNavVisible, me, title } = props;
+  const [showMenu, setShowMenu] = React.useState(false)
 
   return (
-    <tr>
-      <td style={{ backgroundColor: '#ff6600', padding: '0px' }}>
-        <table style={{ border: '0px', padding: '2px', borderSpacing: '0px', width: '100%' }}>
-          <tbody>
-            <tr>
-              <td style={{ width: '18px', padding: '0px', paddingRight: '4px' }}>
+    <React.Fragment>
+      <AppBar color='primary'>
+        <Toolbar style={{ height: 'auto', overflowWrap: 'break-word' }}>
+          <Grid container justify="space-between" spacing={3} wrap="wrap">
+            <Grid container item style={{ flex: 1, alignSelf: 'center' }} spacing={1}>
+              <Grid item>
                 <Link href="/">
                   <a>
                     <img
@@ -28,41 +32,64 @@ export function Header(props: IHeaderProps): JSX.Element {
                         border: '1px',
                         borderColor: 'white',
                         borderStyle: 'solid',
-                        height: '18px',
-                        width: '18px',
+                        height: '36px',
+                        width: '36px',
                       }}
                     />
                   </a>
                 </Link>
-              </td>
-              <td style={{ lineHeight: '12px', height: '10px', padding: '0px' }}>
-                <HeaderNav currentUrl={currentUrl} isNavVisible={isNavVisible} title={title} />
-              </td>
-              <td style={{ textAlign: 'right', padding: '0px', paddingRight: '4px' }}>
+              </Grid>
+              <Grid item style={{ flex: 1, alignSelf: 'center' }}>
+                <Typography color="secondary">
+                  {title}
+                </Typography>
+              </Grid>
+            </Grid>
+            <Hidden smDown>
+              <Grid item style={{
+                display: 'flex',
+                justifyContent: 'flex-end'
+              }}>
+                {isNavVisible && (
+                  <HeaderNav currentUrl={currentUrl} />
+                )}
                 {me ? (
-                  <span className="pagetop">
+                  <>
                     <Link href={`/user?id=${me.id}`}>
-                      <a>{me.id}</a>
+                      <Button variant='text' color='secondary' style={{ fontSize: '0.8rem' }}>{`${me.id} (${me.karma}) | `}</Button>
                     </Link>
-                    {` (${me.karma}) | `}
-                    <a
+                    <Link
                       href={`/logout?auth=d78ccc2c6120ffe08f32451519c2ff46d34c51ab&amp;goto=${currentUrl}`}
                     >
-                      logout
-                    </a>
-                  </span>
-                ) : (
-                  <span className="pagetop">
-                    <Link href={`/login?goto=${currentUrl}`}>
-                      <a>login</a>
+                      <Button variant='contained' color='secondary' style={{ marginLeft: 12 }}>logout</Button>
                     </Link>
-                  </span>
+                  </>
+                ) : (
+                  <Link href={`/login?goto=${currentUrl}`}>
+                    <Button variant='contained' color='secondary' style={{ marginLeft: 12 }}>SIGN UP/LOG IN</Button>
+                  </Link>
                 )}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </td>
-    </tr>
+              </Grid>
+            </Hidden>
+            <Hidden mdUp>
+              <IconButton edge="start" color="secondary" aria-label="menu" onClick={() => setShowMenu(!showMenu)}>
+                <MenuIcon />
+              </IconButton>
+            </Hidden>
+          </Grid>
+        </Toolbar>
+        {showMenu &&
+          <Hidden mdUp>
+            <Grid container direction="column">
+              {isNavVisible && (
+                <HeaderNav currentUrl={currentUrl} />
+              )}
+            </Grid>
+            <div style={{ margin: '12px 16px' }}>
+              <Button variant='contained' color='secondary' fullWidth>SIGN UP/LOG IN</Button>
+            </div>
+          </Hidden>}
+      </AppBar>
+    </React.Fragment>
   );
 }

@@ -8,6 +8,8 @@ import * as React from 'react';
 
 import { initApollo } from './init-apollo';
 import { IS_SERVER } from '../config';
+import { ThemeProvider } from '@material-ui/styles';
+import theme from './theme';
 
 const logger = debug('app:withData');
 logger.log = console.log.bind(console);
@@ -111,7 +113,9 @@ export function withData<TProps extends IWithDataProps>(
     render(): JSX.Element {
       return (
         <ApolloProvider client={this.apollo}>
-          <ComposedComponent {...this.props} />
+          <ThemeProvider theme={theme}>
+            <ComposedComponent {...this.props} />
+          </ThemeProvider>
         </ApolloProvider>
       );
     }

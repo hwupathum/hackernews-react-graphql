@@ -1,69 +1,98 @@
+import { Button } from '@material-ui/core';
 import Link from 'next/link';
 import * as React from 'react';
 
 interface IHeaderNavProps {
   userId?: string;
   currentUrl: string;
-  isNavVisible: boolean;
-  title: string;
 }
 
 export function HeaderNav(props: IHeaderNavProps): JSX.Element {
-  const { userId, currentUrl, isNavVisible, title } = props;
+  const { userId, currentUrl } = props;
 
-  return isNavVisible ? (
-    <span className="pagetop">
-      <b className="hnname">
-        <Link href="/" as="/news">
-          <a>{title}</a>
-        </Link>
-      </b>
-      &nbsp;
+  return (
+    <>
       {userId && (
         <Link href="/newswelcome">
-          <a>welcome</a>
+          <Button variant='text' color='secondary' style={{ fontSize: '0.8rem' }}>Welcome</Button>
         </Link>
       )}
-      {userId && ' | '}
       <Link href="/newest">
-        <a className={currentUrl === '/newest' ? 'topsel' : ''}>new</a>
+        <Button
+          variant='text'
+          color={currentUrl === '/newest' ? 'default' : 'secondary'}
+          style={{ fontSize: '0.8rem' }}
+        >
+          new
+        </Button>
       </Link>
-      {userId && ' | '}
       {userId && (
         <Link href={`/threads?id=${userId}`}>
-          <a className={currentUrl === '/threads' ? 'topsel' : ''}>threads</a>
+          <Button
+          variant='text'
+          color={currentUrl === '/threads' ? 'default' : 'secondary'}
+          style={{ fontSize: '0.8rem' }}
+        >
+          threads
+        </Button>
         </Link>
       )}
-      {' | '}
       <Link href="/newcomments">
-        <a className={currentUrl === '/newcomments' ? 'topsel' : ''}>comments</a>
+      <Button
+          variant='text'
+          color={currentUrl === '/newcomments' ? 'default' : 'secondary'}
+          style={{ fontSize: '0.8rem' }}
+        >
+          comments
+        </Button>
       </Link>
-      {' | '}
       <Link href="/show">
-        <a className={currentUrl === '/show' ? 'topsel' : ''}>show</a>
+      <Button
+          variant='text'
+          color={currentUrl === '/show' ? 'default' : 'secondary'}
+          style={{ fontSize: '0.8rem' }}
+        >
+          show
+        </Button>
       </Link>
-      {' | '}
       <Link href="/ask">
-        <a className={currentUrl === '/ask' ? 'topsel' : ''}>ask</a>
+      <Button
+          variant='text'
+          color={currentUrl === '/ask' ? 'default' : 'secondary'}
+          style={{ fontSize: '0.8rem' }}
+        >
+          ask
+        </Button>
       </Link>
-      {' | '}
       <Link href="/jobs">
-        <a className={currentUrl === '/jobs' ? 'topsel' : ''}>jobs</a>
+      <Button
+          variant='text'
+          color={currentUrl === '/jobs' ? 'default' : 'secondary'}
+          style={{ fontSize: '0.8rem' }}
+        >
+          jobs
+        </Button>
       </Link>
-      {' | '}
       <Link href="/submit">
-        <a className={currentUrl === '/submit' ? 'topsel' : ''}>submit</a>
+      <Button
+          variant='text'
+          color={currentUrl === '/submit' ? 'default' : 'secondary'}
+          style={{ fontSize: '0.8rem' }}
+        >
+          submit
+        </Button>
       </Link>
-      {currentUrl === '/best' && ' | '}
       {currentUrl === '/best' && (
         <Link href="/best">
-          <a className="topsel">best</a>
+          <Button
+          variant='text'
+          color='default'
+          style={{ fontSize: '0.8rem' }}
+        >
+          best
+        </Button>
         </Link>
       )}
-    </span>
-  ) : (
-    <span className="pagetop">
-      <b>{title}</b>
-    </span>
-  );
+    </>
+  )
 }
