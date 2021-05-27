@@ -1,63 +1,78 @@
+import { Grid, Icon, Input, TextField, Typography } from '@material-ui/core';
+import { Search } from '@material-ui/icons';
 import Link from 'next/link';
 import * as React from 'react';
 
 export function Footer(): JSX.Element {
   return (
-    <tr>
-      <td style={{ padding: '0px' }}>
-        <img alt="" src="/static/s.gif" height="10" width="0" />
-        <table style={{ height: '2px', width: '100%', borderSpacing: '0px' }}>
-          <tbody>
-            <tr>
-              <td style={{ backgroundColor: '#ff6600' }} />
-            </tr>
-          </tbody>
-        </table>
-        <br />
-        <div style={{ textAlign: 'center' }}>
-          <span className="yclinks">
-            <a href="/newsguidelines">Guidelines</a>
-            &nbsp;|{' '}
-            <Link href="/newsfaq">
-              <a>FAQ</a>
-            </Link>
-            &nbsp;| <a href="mailto:hn@ycombinator.com">Support</a>
-            &nbsp;| <a href="https://github.com/HackerNews/API">API</a>
-            &nbsp;|{' '}
-            <Link href="/security">
-              <a>Security</a>
-            </Link>
-            &nbsp;|{' '}
-            <Link href="/lists">
-              <a>Lists</a>
-            </Link>
-            &nbsp;|{' '}
-            <Link href="/bookmarklet">
-              <a>Bookmarklet</a>
-            </Link>
-            &nbsp;|{' '}
-            <Link href="/dmca">
-              <a>DMCA</a>
-            </Link>
-            &nbsp;| <a href="http://www.ycombinator.com/apply/">Apply to YC</a>
-            &nbsp;| <a href="mailto:hn@ycombinator.com">Contact</a>
-          </span>
-          <br />
-          <br />
-          <form method="get" action="//hn.algolia.com/" style={{ marginBottom: '1em' }}>
-            Search:
-            <input
+    <div style={{ width: '100%', marginLeft: -8, backgroundColor: '#6A7172', marginBottom: -12, padding: 8 }}>
+      <br />
+      <Grid container justify="center" spacing={2}>
+        <Grid item>
+          <a href="/newsguidelines"><Typography color="secondary" variant="caption">Guidelines</Typography></a>
+        </Grid>
+        <Grid item>
+          <Link href="/newsfaq">
+            <a><Typography color="secondary" variant="caption">FAQ</Typography></a>
+          </Link>
+        </Grid>
+        <Grid item>
+          <a href="mailto:hn@ycombinator.com"><Typography color="secondary" variant="caption">Support</Typography></a>
+        </Grid>
+        <Grid item>
+          <a href="https://github.com/HackerNews/API"><Typography color="secondary" variant="caption">API</Typography></a>
+        </Grid>
+        <Grid item>
+          <Link href="/security">
+            <a><Typography color="secondary" variant="caption">Security</Typography></a>
+          </Link>
+        </Grid>
+        <Grid item>
+          <Link href="/lists">
+            <a><Typography color="secondary" variant="caption">Lists</Typography></a>
+          </Link>
+        </Grid>
+        <Grid item>
+          <Link href="/bookmarklet">
+            <a><Typography color="secondary" variant="caption">Bookmarklet</Typography></a>
+          </Link>
+        </Grid>
+        <Grid item>
+          <Link href="/dmca">
+            <a><Typography color="secondary" variant="caption">DMCA</Typography></a>
+          </Link>
+        </Grid>
+        <Grid item>
+          <a href="http://www.ycombinator.com/apply/"><Typography color="secondary" variant="caption">Apply to YC</Typography></a>
+        </Grid>
+        <Grid item>
+          <a href="mailto:hn@ycombinator.com"><Typography color="secondary" variant="caption">Contact</Typography></a>
+        </Grid>
+        <Grid item xs={12}>
+          <form method="get" action="//hn.algolia.com/" style={{ marginBottom: '1em', textAlign: 'center' }}>
+            <TextField
               type="text"
               name="q"
-              size={17}
+              style={{ backgroundColor: 'white', borderRadius: 4 }}
+              InputProps={{
+                startAdornment: <div style={{width: 12}}/>,
+                endAdornment:
+                  <>
+                    <Typography color="textSecondary" variant="caption">by</Typography>
+                    <img src="/static/algolia.png" style={{ height: 34, padding: 6 }} />
+                  </>
+              }}
+              placeholder="Search"
+              variant="standard"
+              // size="small"
               autoCorrect="off"
               spellCheck={false}
               autoCapitalize="off"
               autoComplete="false"
             />
           </form>
-        </div>
-      </td>
-    </tr>
+        </Grid>
+      </Grid>
+    </div>
   );
 }

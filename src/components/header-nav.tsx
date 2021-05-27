@@ -29,16 +29,16 @@ export function HeaderNav(props: IHeaderNavProps): JSX.Element {
       {userId && (
         <Link href={`/threads?id=${userId}`}>
           <Button
-          variant='text'
-          color={currentUrl === '/threads' ? 'default' : 'secondary'}
-          style={{ fontSize: '0.8rem' }}
-        >
-          threads
+            variant='text'
+            color={currentUrl === '/threads' ? 'default' : 'secondary'}
+            style={{ fontSize: '0.8rem' }}
+          >
+            threads
         </Button>
         </Link>
       )}
       <Link href="/newcomments">
-      <Button
+        <Button
           variant='text'
           color={currentUrl === '/newcomments' ? 'default' : 'secondary'}
           style={{ fontSize: '0.8rem' }}
@@ -47,7 +47,7 @@ export function HeaderNav(props: IHeaderNavProps): JSX.Element {
         </Button>
       </Link>
       <Link href="/show">
-      <Button
+        <Button
           variant='text'
           color={currentUrl === '/show' ? 'default' : 'secondary'}
           style={{ fontSize: '0.8rem' }}
@@ -56,7 +56,7 @@ export function HeaderNav(props: IHeaderNavProps): JSX.Element {
         </Button>
       </Link>
       <Link href="/ask">
-      <Button
+        <Button
           variant='text'
           color={currentUrl === '/ask' ? 'default' : 'secondary'}
           style={{ fontSize: '0.8rem' }}
@@ -65,7 +65,7 @@ export function HeaderNav(props: IHeaderNavProps): JSX.Element {
         </Button>
       </Link>
       <Link href="/jobs">
-      <Button
+        <Button
           variant='text'
           color={currentUrl === '/jobs' ? 'default' : 'secondary'}
           style={{ fontSize: '0.8rem' }}
@@ -73,23 +73,23 @@ export function HeaderNav(props: IHeaderNavProps): JSX.Element {
           jobs
         </Button>
       </Link>
-      <Link href="/submit">
-      <Button
+      {userId && <Link href="/submit">
+        <Button
           variant='text'
           color={currentUrl === '/submit' ? 'default' : 'secondary'}
           style={{ fontSize: '0.8rem' }}
         >
           submit
         </Button>
-      </Link>
+      </Link>}
       {currentUrl === '/best' && (
         <Link href="/best">
           <Button
-          variant='text'
-          color='default'
-          style={{ fontSize: '0.8rem' }}
-        >
-          best
+            variant='text'
+            color='default'
+            style={{ fontSize: '0.8rem' }}
+          >
+            best
         </Button>
         </Link>
       )}
