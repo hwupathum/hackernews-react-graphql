@@ -296,3 +296,11 @@ pre { max-width: 900px; }
             transform: scale(1);
   }
 }
+
+.MuiPagination-ul {
+  justify-content: center;
+}
+
+.MuiPaginationItem-textPrimary.Mui-selected {
+  color: white !important
+}

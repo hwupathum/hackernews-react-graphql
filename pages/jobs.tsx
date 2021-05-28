@@ -7,6 +7,7 @@ import { withDataAndRouter } from '../src/helpers/with-data';
 import { MainLayout } from '../src/layouts/main-layout';
 import { FeedType } from '../src/data/models';
 import { POSTS_PER_PAGE } from '../src/config';
+import { Typography } from '@material-ui/core';
 
 const query = gql`
   query topNewsItems($type: FeedType!, $first: Int!, $skip: Int!) {
@@ -49,24 +50,14 @@ export function JobsPage(props): JSX.Element {
         isRankVisible={false}
         isUpvoteVisible={false}
         notice={
-          <>
-            <tr key="noticetopspacer" style={{ height: '20px' }} />
-            <tr key="notice">
-              <td />
-              <td>
-                <img alt="" src="/static/s.gif" height="1" width="14" />
-              </td>
-              <td>
-                These are jobs at startups that were funded by Y Combinator. You can also get a job
+          <Typography variant="caption" style={{margin: '12px 0'}} component="p" color="textSecondary">
+            These are jobs at startups that were funded by Y Combinator. You can also get a job
                 at a YC startup through{' '}
-                <a href="https://triplebyte.com/?ref=yc_jobs">
-                  <u>Triplebyte</u>
-                </a>
+            <a href="https://triplebyte.com/?ref=yc_jobs">
+              <u>Triplebyte</u>
+            </a>
                 .
-              </td>
-            </tr>
-            <tr key="noticebottomspacer" style={{ height: '20px' }} />
-          </>
+          </Typography>
         }
         skip={POSTS_PER_PAGE * pageNumber}
       />

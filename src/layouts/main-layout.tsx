@@ -42,10 +42,11 @@ export function MainLayout(props: IMainLayoutProps): JSX.Element {
         me={data?.me}
         title={title!}
       />
-      <div style={{ height: '65px' }} />
+      <div style={{ height: '68px' }} />
       <Container>
         {children}
       </Container>
+      <div style={{ height: '25px' }} />
       {isFooterVisible && <Footer />}
     </div>
   );

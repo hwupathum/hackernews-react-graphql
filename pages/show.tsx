@@ -8,6 +8,7 @@ import { withDataAndRouter } from '../src/helpers/with-data';
 import { MainLayout } from '../src/layouts/main-layout';
 import { FeedType } from '../src/data/models';
 import { POSTS_PER_PAGE } from '../src/config';
+import { Typography } from '@material-ui/core';
 
 const query = gql`
   query topNewsItems($type: FeedType!, $first: Int!, $skip: Int!) {
@@ -44,11 +45,7 @@ export function ShowHNPage(props): JSX.Element {
         first={first}
         skip={skip}
         notice={
-          <>
-            <tr key="noticetopspacer" style={{ height: '5px' }} />
-            <tr key="notice">
-              <td colSpan={2} />
-              <td>
+          <Typography variant="caption" style={{margin: '12px 0'}} component="p" color="textSecondary">
                 Please read the{' '}
                 <Link href="/showhn">
                   <a>
@@ -62,10 +59,7 @@ export function ShowHNPage(props): JSX.Element {
                   </a>
                 </Link>{' '}
                 Show HNs.
-              </td>
-            </tr>
-            <tr key="noticebottomspacer" style={{ height: '10px' }} />
-          </>
+          </Typography>
         }
       />
     </MainLayout>

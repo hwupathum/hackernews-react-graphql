@@ -1,4 +1,5 @@
-import { Card, CardContent } from '@material-ui/core';
+import { Button, Card, CardContent, Typography } from '@material-ui/core';
+import { Pagination } from '@material-ui/lab';
 import * as React from 'react';
 import { DataValue } from 'react-apollo';
 
@@ -43,7 +44,7 @@ export function NewsFeedView(props: INewsFeedProps): JSX.Element {
     currentUrl,
   } = props;
 
-  const nextPage = Math.ceil((skip || 1) / first) + 1;
+  const nextPage = Math.ceil(skip / first) + 1;
 
   return (
     <>
@@ -71,20 +72,13 @@ export function NewsFeedView(props: INewsFeedProps): JSX.Element {
           </Card>,
           <div style={{ height: 5 }} />,
         ])}
-      <tr key="morespace" className="morespace" style={{ height: '10px' }} />
-      <tr key="morelinktr">
-        <td key="morelinkcolspan" colSpan={2} />
-        <td key="morelinktd" className="title">
-          <a
-            key="morelink"
-            href={`${currentUrl}?p=${nextPage}`}
-            className="morelink"
-            rel="nofollow"
-          >
-            More
-                  </a>
-        </td>
-      </tr>
+      <div style={{ height: '20px' }} />
+      <Pagination
+        count={nextPage + 1}
+        page={nextPage}
+        color="primary"
+        onChange={(event,value) => {window.location.href = `${currentUrl}?p=${value-1}`}}
+      />
     </>
   );
 }
