@@ -55,7 +55,7 @@ export function Header(props: IHeaderProps): JSX.Element {
                 {isNavVisible && (
                   <HeaderNav currentUrl={currentUrl} />
                 )}
-                {blank || <Grid item>
+                {!blank && isNavVisible && <Grid item>
                   <form method="get" action="//hn.algolia.com/" style={{ textAlign: 'center' }}>
                     <TextField
                       type="text"
@@ -73,7 +73,7 @@ export function Header(props: IHeaderProps): JSX.Element {
                     />
                   </form>
                 </Grid>}
-                {!blank ? me ? (
+                {!blank && isNavVisible ? me ? (
                   <>
                     <Link href={`/user?id=${me.id}`}>
                       <Button variant='text' color='primary' style={{ fontSize: '0.8rem' }}>{`${me.id} (${me.karma}) | `}</Button>
@@ -91,7 +91,7 @@ export function Header(props: IHeaderProps): JSX.Element {
                 ) : ""}
               </Grid>
             </Hidden>
-            {!blank && <Hidden mdUp>
+            {!blank && isNavVisible && <Hidden mdUp>
               <IconButton edge="start" color="primary" aria-label="menu" onClick={() => setShowMenu(!showMenu)}>
                 <MenuIcon />
               </IconButton>

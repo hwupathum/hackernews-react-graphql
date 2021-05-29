@@ -1,3 +1,4 @@
+import { Card, CardContent, Divider } from '@material-ui/core';
 import * as React from 'react';
 
 import { NewsItemModel } from '../data/models';
@@ -6,6 +7,8 @@ import { Comments } from './comments';
 import { LoadingSpinner } from './loading-spinner';
 import { NewsDetail } from './news-detail';
 import { NewsTitle } from './news-title';
+import { IMeQuery, ME_QUERY } from '../data/queries/me-query';
+import { useQuery } from '@apollo/client';
 
 export interface INewsItemWithCommentsProps {
   error: Error;
@@ -16,6 +19,7 @@ export interface INewsItemWithCommentsProps {
 /** Acts as the component for a page of a news item with all it's comments */
 export function NewsItemWithComments(props: INewsItemWithCommentsProps): JSX.Element {
   const { loading, error, newsItem } = props;
+  const { data } = useQuery<IMeQuery>(ME_QUERY);
 
   if (error) {
     return (
@@ -29,31 +33,17 @@ export function NewsItemWithComments(props: INewsItemWithCommentsProps): JSX.Ele
     return <LoadingSpinner />;
   }
 
+  console.log(data)
+
   return (
-    <tr>
-      <td style={{ padding: '0px' }}>
-        <table
-          style={{
-            border: '0px',
-            padding: '0px',
-            borderCollapse: 'collapse',
-            borderSpacing: '0px',
-          }}
-          className="itemlist"
-        >
-          <tbody>
-            <NewsTitle isRankVisible={false} {...newsItem} />
-            <NewsDetail isPostScrutinyVisible {...newsItem} />
-            <tr key="morespace" className="morespace" style={{ height: '10px' }} />
-            <CommentBox />
-          </tbody>
-        </table>
-        <br />
-        <br />
+    <Card variant="outlined">
+      <CardContent>
+        <NewsTitle isRankVisible={false} {...newsItem} />
+        <NewsDetail isPostScrutinyVisible {...newsItem} />
+        <Divider style={{margin: '12px 0'}}/>
+        <CommentBox me={!!data?.me} />
         <Comments newsItem={newsItem} />
-        <br />
-        <br />
-      </td>
-    </tr>
+      </CardContent>
+    </Card>
   );
 }

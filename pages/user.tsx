@@ -1,4 +1,6 @@
 import { useQuery } from '@apollo/client';
+import { Avatar, Button, Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, Divider, FormControl, IconButton, InputLabel, Select, TextField, Tooltip, Typography } from '@material-ui/core';
+import { FilterVintage, Help } from '@material-ui/icons';
 import gql from 'graphql-tag';
 import Link from 'next/link';
 import * as React from 'react';
@@ -62,243 +64,187 @@ function UserPage(props: IUserPageProps): JSX.Element {
 
   if (data?.me && data?.user.id === data.me.id)
     return (
-      <MainLayout currentUrl={router.pathname} isFooterVisible={false}>
-        <tr>
-          <td>
+      <MainLayout currentUrl={router.pathname}>
+        <Card variant="outlined" style={{ margin: 'auto', marginTop: 10 }}>
+          <CardHeader
+            avatar={
+              <Avatar aria-label="recipe" style={{ backgroundColor: '#ff6600' }}>
+                {data?.user.id.substring(0, 1).toUpperCase()}
+              </Avatar>
+            }
+            title={data?.user.id}
+            subheader={`Created ${convertNumberToTimeAgo(data?.user.creationTime)}`}
+          />
+          <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '0 16px' }}>
+            <Tooltip title="Karma">
+              <Typography variant="caption" color="textSecondary">
+                <FilterVintage fontSize="small" color="primary" style={{ marginBottom: -5, padding: '0 2px' }} />
+                {data?.user.karma}
+
+              </Typography>
+            </Tooltip>
+          </div>
+          <Divider />
+          <CardContent>
             <form className="profileform" method="post" action="/xuser">
               <input type="hidden" name="id" value="clintonwoo" />
               <input type="hidden" name="hmac" value="71104445c3c41b4167c38db67a656e610d5fbad9" />
-              <table style={{ border: '0px' }}>
-                <tbody>
-                  <tr className="athing">
-                    <td style={{ verticalAlign: 'top' }}>user:</td>
-                    <td>
-                      <Link href="/user?id=clintonwoo">
-                        <a className="hnuser" style={{ color: '#3c963c' }}>
-                          {data?.user.id}
-                        </a>
-                      </Link>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style={{ verticalAlign: 'top' }}>created:</td>
-                    <td>{convertNumberToTimeAgo(data?.user.creationTime)}</td>
-                  </tr>
-                  <tr>
-                    <td style={{ verticalAlign: 'top' }}>karma:</td>
-                    <td>{data?.user.karma}</td>
-                  </tr>
-                  <tr>
-                    <td style={{ verticalAlign: 'top' }}>about:</td>
-                    <td>
-                      <textarea
-                        cols={60}
-                        defaultValue={renderHTML(about)}
-                        name="about"
-                        onChange={onAboutChange}
-                        rows={5}
-                        style={{ fontSize: '-2' }}
-                        wrap="virtual"
-                      />
-                      <Link href="/formatdoc">
-                        <a tabIndex={-1} style={{ color: '#afafaf' }}>
-                          help
-                        </a>
-                      </Link>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style={{ verticalAlign: 'top' }}>email:</td>
-                    <td>
-                      <input
-                        type="text"
-                        name="uemail"
-                        defaultValue={email}
-                        onChange={onEmailChange}
-                        size={60}
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style={{ verticalAlign: 'top' }}>showdead:</td>
-                    <td>
-                      <select defaultValue="no" name="showd">
-                        <option value="yes">yes</option>
-                        <option value="no">no</option>
-                      </select>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style={{ verticalAlign: 'top' }}>noprocrast:</td>
-                    <td>
-                      <select defaultValue="no" name="nopro">
-                        <option value="yes">yes</option>
-                        <option value="no">no</option>
-                      </select>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style={{ verticalAlign: 'top' }}>maxvisit:</td>
-                    <td>
-                      <input type="text" name="maxv" defaultValue="20" size={16} />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style={{ verticalAlign: 'top' }}>minaway:</td>
-                    <td>
-                      <input type="text" name="mina" defaultValue="180" size={16} />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style={{ verticalAlign: 'top' }}>delay:</td>
-                    <td>
-                      <input type="text" name="delay" defaultValue="0" size={16} />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td />
-                    <td>
-                      <Link href="/changepw">
-                        <a>
-                          <u>change password</u>
-                        </a>
-                      </Link>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td />
-                    <td>
-                      <Link href="/submitted?id=clintonwoo">
-                        <a>
-                          <u>submissions</u>
-                        </a>
-                      </Link>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td />
-                    <td>
-                      <Link href="/threads?id=clintonwoo">
-                        <a>
-                          <u>comments</u>
-                        </a>
-                      </Link>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td />
-                    <td>
-                      <Link href="/hidden">
-                        <a>
-                          <u>hidden</u>
-                        </a>
-                      </Link>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td />
-                    <td>
-                      <Link href="/upvoted?id=clintonwoo">
-                        <a>
-                          <u>upvoted submissions</u>
-                        </a>
-                      </Link>
-                      {' / '}
-                      <Link href="/upvoted?id=clintonwoo&comments=t">
-                        <a>
-                          <u>comments</u>
-                        </a>
-                      </Link>
-                      &nbsp;&nbsp;
-                      <span style={{ fontStyle: 'italic' }}>(private)</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td />
-                    <td>
-                      <Link href="/favorites?id=clintonwoo">
-                        <a>
-                          <u>favorite submissions</u>
-                        </a>
-                      </Link>
-                      {' / '}
-                      <Link href="/favorites?id=clintonwoo&amp;comments=t">
-                        <a>
-                          <u>comments</u>
-                        </a>
-                      </Link>
-                      &nbsp;&nbsp;
-                      <span style={{ fontStyle: 'italic' }}>(shared)</span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <br />
-              <input type="submit" value="update" />
+              <TextField
+                defaultValue={renderHTML(about)}
+                name="about"
+                onChange={onAboutChange}
+                rows={5}
+                multiline
+                fullWidth
+                label="About"
+                variant="outlined"
+              />
+              <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <Link href="/formatdoc">
+                  <IconButton>
+                    <Help />
+                  </IconButton>
+                </Link>
+              </div>
+              <div style={{ height: 12 }} />
+              <TextField
+                type="text"
+                name="uemail"
+                defaultValue={email}
+                onChange={onEmailChange}
+                fullWidth
+                label="Email"
+                variant="outlined"
+              />
+              <div style={{ height: 12 }} />
+              <FormControl style={{ width: '100%' }}>
+                <InputLabel id="demo-simple-select-label">Show Dead</InputLabel>
+                <Select variant="outlined" fullWidth defaultValue="no" name="showd" id="demo-simple-select-label">
+                  <option value="yes">yes</option>
+                  <option value="no">no</option>
+                </Select>
+              </FormControl>
+              <div style={{ height: 12 }} />
+              <FormControl style={{ width: '100%' }}>
+                <InputLabel id="demo-simple-select-label">No Procreastinate</InputLabel>
+                <Select variant="outlined" fullWidth defaultValue="no" name="nopro" id="demo-simple-select-label">
+                  <option value="yes">yes</option>
+                  <option value="no">no</option>
+                </Select>
+              </FormControl>
+              <div style={{ height: 12 }} />
+              <TextField
+                fullWidth
+                label="Maxvisit"
+                variant="outlined" type="text" name="maxv" defaultValue="20" />
+              <div style={{ height: 12 }} />
+              <TextField
+                fullWidth
+                label="MinAway"
+                variant="outlined" type="text" name="mina" defaultValue="180" />
+              <div style={{ height: 12 }} />
+              <TextField
+                fullWidth
+                label="Delay"
+                variant="outlined"
+                type="text" name="delay" defaultValue="0" />
+              <div style={{ height: 12 }} />
+              <Button type="submit" color="primary" variant="contained" style={{ fontSize: '0.8rem', fontWeight: 600, color: 'white' }}>Update</Button>
             </form>
-            <br />
-            <br />
-          </td>
-        </tr>
+          </CardContent>
+          <Divider />
+          <CardActions style={{ display: 'block' }}>
+            <Link href={"/changepw"}>
+              <Button size="small" color="primary" style={{ fontSize: '0.8rem', fontWeight: 600 }}>
+                change password
+              </Button>
+            </Link>
+            <Link href={`/submitted?id=${data?.user.id}`}>
+              <Button size="small" color="primary" style={{ fontSize: '0.8rem', fontWeight: 600 }}>
+                submissions
+              </Button>
+            </Link>
+            <Link href={`/threads?id=${data?.user.id}`}>
+              <Button size="small" color="primary" style={{ fontSize: '0.8rem', fontWeight: 600 }}>
+                comments
+              </Button>
+            </Link>
+            <Link href={`/favorites?id=${data?.user.id}`}>
+              <Button size="small" color="primary" style={{ fontSize: '0.8rem', fontWeight: 600 }}>
+                favourites
+              </Button>
+            </Link>
+            <Link href={"/hidden"}>
+              <Button size="small" color="primary" style={{ fontSize: '0.8rem', fontWeight: 600 }}>
+                hidden
+              </Button>
+            </Link>
+            <Link href={`/upvoted?id=${data?.user.id}`}>
+              <Button size="small" color="primary" style={{ fontSize: '0.8rem', fontWeight: 600 }}>
+                upvoted submissions
+              </Button>
+            </Link>
+            <Link href={`/upvoted?id=${data?.user.id}&comments=t`}>
+              <Button size="small" color="primary" style={{ fontSize: '0.8rem', fontWeight: 600 }}>
+                upvoted comments
+              </Button>
+            </Link>
+            <Link href={`/submitted?id=${data?.user.id}`}>
+              <Button size="small" color="primary" style={{ fontSize: '0.8rem', fontWeight: 600 }}>
+                submissions
+              </Button>
+            </Link>
+          </CardActions>
+        </Card>
       </MainLayout>
     );
 
   return (
-    <MainLayout currentUrl={router.pathname} isFooterVisible={false}>
-      <tr>
-        <td>
-          <table style={{ border: '0' }}>
-            <tbody>
-              <tr className="athing">
-                <td style={{ verticalAlign: 'top' }}>user:</td>
-                <td>
-                  <a href={`user?id=${data?.user?.id}`} className="hnuser">
-                    {data?.user.id}
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td style={{ verticalAlign: 'top' }}>created:</td>
-                <td>{convertNumberToTimeAgo(data?.user.creationTime)}</td>
-              </tr>
-              <tr>
-                <td style={{ verticalAlign: 'top' }}>karma:</td>
-                <td>{data?.user.karma}</td>
-              </tr>
-              <tr>
-                <td style={{ verticalAlign: 'top' }}>about:</td>
-                <td>{data?.user.about && renderHTML(data?.user.about)}</td>
-              </tr>
-              <tr>
-                <td />
-                <td>
-                  <a href={`submitted?id=${data?.user.id}`}>
-                    <u>submissions</u>
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td />
-                <td>
-                  <a href={`threads?id=${data?.user.id}`}>
-                    <u>comments</u>
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td />
-                <td>
-                  <a href={`favorites?id=${data?.user.id}`}>
-                    <u>favorites</u>
-                  </a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <br />
-          <br />
-        </td>
-      </tr>
+    <MainLayout currentUrl={router.pathname}>
+      <Card variant="outlined" style={{ maxWidth: 600, margin: 'auto', marginTop: 10 }}>
+        <CardHeader
+          avatar={
+            <Avatar aria-label="recipe" style={{ backgroundColor: '#ff6600' }}>
+              {data?.user.id.substring(0, 1).toUpperCase()}
+            </Avatar>
+          }
+          title={data?.user.id}
+          subheader={`Created ${convertNumberToTimeAgo(data?.user.creationTime)}`}
+        />
+        <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '0 16px' }}>
+          <Tooltip title="Karma">
+            <Typography variant="caption" color="textSecondary">
+              <FilterVintage fontSize="small" color="primary" style={{ marginBottom: -5, padding: '0 2px' }} />
+              {data?.user.karma}
+
+            </Typography>
+          </Tooltip>
+        </div>
+        <Divider />
+        <CardContent>
+          <Typography variant="body2">
+            {data?.user.about && renderHTML(data?.user.about)}
+          </Typography>
+        </CardContent>
+        <Divider />
+        <CardActions style={{ display: 'block' }}>
+          <Link href={`submitted?id=${data?.user.id}`}>
+            <Button size="small" color="primary" style={{ fontSize: '0.8rem', fontWeight: 600 }}>
+              submissions
+              </Button>
+          </Link>
+          <Link href={`threads?id=${data?.user.id}`}>
+            <Button size="small" color="primary" style={{ fontSize: '0.8rem', fontWeight: 600 }}>
+              comments
+              </Button>
+          </Link>
+          <Link href={`favorites?id=${data?.user.id}`}>
+            <Button size="small" color="primary" style={{ fontSize: '0.8rem', fontWeight: 600 }}>
+              favourites
+              </Button>
+          </Link>
+        </CardActions>
+      </Card>
     </MainLayout>
   );
 }

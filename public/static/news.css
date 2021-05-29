@@ -10,7 +10,7 @@ textarea { font-family:monospace; font-size:10pt; color:#000000; }
 
 a:link    { color:#000000; text-decoration:none; }
 a:visited { color:#828282; text-decoration:none; }
-a:hover { color:#828282; text-decoration:underline; }
+a:hover { text-decoration:underline; }
 
 .default { font-family:Verdana, Geneva, sans-serif; font-size: 10pt; color:#828282; }
 .admin   { font-family:Verdana, Geneva, sans-serif; font-size:8.5pt; color:#000000; }
@@ -22,7 +22,7 @@ a:hover { color:#828282; text-decoration:underline; }
 .comment { font-family:Verdana, Geneva, sans-serif; font-size:  9pt; }
 .hnname  { margin-right: 5px; }
 
-.comment a:link, .comment a:visited { text-decoration: underline; }
+/* .comment a:link, .comment a:visited { text-decoration: underline; } */
 .noshow { display: none; }
 .nosee { visibility: hidden; pointer-events: none; cursor: default }
 

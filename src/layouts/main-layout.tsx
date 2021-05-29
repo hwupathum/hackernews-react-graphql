@@ -43,7 +43,7 @@ export function MainLayout(props: IMainLayoutProps): JSX.Element {
         title={title!}
       />
       <div style={{ height: '68px' }} />
-      <Container>
+      <Container style={{minHeight: 'calc(100vh - 120px)'}}>
         {children}
       </Container>
       <div style={{ height: '25px' }} />

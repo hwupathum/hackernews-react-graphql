@@ -72,9 +72,9 @@ export function NewsTitle(props: INewsTitleProps): JSX.Element {
           )}
         </span>
         {title}
-        {url && <Typography variant="caption" color="textSecondary">
+        {url && <Typography variant="caption" color="primary">
           {' '}
-          <a href={url || `item?id=${id}`} style={{ color: '#6a7172' }}>
+          <a href={url || `item?id=${id}`} style={{ color: '#ff6600' }}>
             {parse(url).hostname}
             <OpenInNew style={{ fontSize: 14, marginBottom: -3 }} />
           </a>

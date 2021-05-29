@@ -1,10 +1,10 @@
 import { useMutation } from '@apollo/client';
 import { Typography } from '@material-ui/core';
-import { ArrowUpward, ChatBubbleOutline, Visibility, VisibilityOff } from '@material-ui/icons';
+import { ArrowUpward, ChatBubbleOutline, History, Language, Visibility, VisibilityOff } from '@material-ui/icons';
 import Link from 'next/link';
 import Router from 'next/router';
 import * as React from 'react';
-
+import queryString from "query-string";
 import { HIDE_NEWS_ITEM_MUTATION } from '../data/mutations/hide-news-item-mutation';
 import { UPVOTE_NEWS_ITEM_MUTATION } from '../data/mutations/upvote-news-item-mutation';
 import { convertNumberToTimeAgo } from '../helpers/convert-number-to-time-ago';
@@ -14,6 +14,7 @@ export interface INewsDetailProps {
   creationTime: number;
   hidden?: boolean;
   id: number;
+  title: string
   isFavoriteVisible?: boolean;
   isJobListing?: boolean;
   isPostScrutinyVisible?: boolean;
@@ -44,6 +45,7 @@ export function NewsDetail(props: INewsDetailProps): JSX.Element {
     isJobListing = false,
     isPostScrutinyVisible = false,
     submitterId,
+    title,
     upvoteCount,
   } = props;
 
@@ -65,22 +67,26 @@ export function NewsDetail(props: INewsDetailProps): JSX.Element {
       {hidden ? (
         <a onClick={(): void => unhideNewsItem()} style={HIDE_BUTTON_STYLE}>
           <VisibilityOff style={{ marginBottom: -5, fontSize: 20, marginRight: 2 }} />
-            unhide
+            Unhide
         </a>
       ) : (
         <a onClick={(): Promise<any> => hideNewsItem()} style={HIDE_BUTTON_STYLE}>
           <Visibility style={{ marginBottom: -5, fontSize: 20, marginRight: 2 }} />
-            hide
+            Hide
         </a>
       )}
       {isPostScrutinyVisible && (
         <span>
           {' | '}
-          <a href="https://hn.algolia.com/?query=Sublime%20Text%203.0&sort=byDate&dateRange=all&type=story&storyText=false&prefix&page=0">
-            past
+          <a href={`https://hn.algolia.com/?${queryString.stringify({query: title})}&sort=byDate&dateRange=all&type=story&storyText=false&prefix&page=0`} style={{ color: '#6a7172' }}>
+            <History style={{ marginBottom: -5, fontSize: 20, marginRight: 2 }} />
+            Show history
             </a>
           {' | '}
-          <a href="https://www.google.com/search?q=Sublime%20Text%203.0">web</a>
+          <a href={`https://www.google.com/search?${queryString.stringify({q: title})}`} style={{ color: '#6a7172' }}>
+            <Language style={{ marginBottom: -5, fontSize: 20, marginRight: 2 }} />
+            Search web
+            </a>
         </span>
       )}
       {' | '}
