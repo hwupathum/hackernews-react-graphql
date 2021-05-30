@@ -1,3 +1,4 @@
+import { Card, CardContent, Typography } from '@material-ui/core';
 import Link from 'next/link';
 import * as React from 'react';
 import { withData } from '../src/helpers/with-data';
@@ -7,7 +8,10 @@ import { NoticeLayout } from '../src/layouts/notice-layout';
 export function SecurityPage(): JSX.Element {
   return (
     <NoticeLayout>
-      <b>Hacker News Security</b>
+      <Card variant="outlined">
+        <CardContent>
+        <Typography variant="h5">Hacker News Security</Typography>
+          <br />
       <p>
         If you find a security hole, please let us know at{' '}
         <a href="mailto:security@ycombinator.com">security@ycombinator.com</a>. We try to respond
@@ -19,7 +23,7 @@ export function SecurityPage(): JSX.Element {
       </p>
       <p>
         <b>
-          20170430: <a href="http://www.michaelflaxman.com">Michael Flaxman</a>
+          2017/04/30: <a href="http://www.michaelflaxman.com">Michael Flaxman</a>
         </b>
       </p>
       <ul>
@@ -30,14 +34,14 @@ export function SecurityPage(): JSX.Element {
       </ul>
       <p />
       <p>
-        <b>20170414: Blake Rand</b>
+        <b>2017/04/14: Blake Rand</b>
       </p>
       <ul>
         <li>Links in comments were vulnerable to an IDN homograph attack.</li>
       </ul>
       <p />
       <p>
-        <b>20170315: Blake Rand</b>
+        <b>2017/03/15: Blake Rand</b>
       </p>
       <ul>
         <li>
@@ -47,7 +51,7 @@ export function SecurityPage(): JSX.Element {
       <p />
       <p>
         <b>
-          20170301: <a href="https://twitter.com/_iamjk">Jaikishan Tulswani</a>
+          2017/03/01: <a href="https://twitter.com/_iamjk">Jaikishan Tulswani</a>
         </b>
       </p>
       <ul>
@@ -56,7 +60,7 @@ export function SecurityPage(): JSX.Element {
       <p />
       <p>
         <b>
-          20160217: <a href="http://www.tjosse.me">Eric Tjossem</a>
+          2016/02/17: <a href="http://www.tjosse.me">Eric Tjossem</a>
         </b>
       </p>
       <ul>
@@ -65,7 +69,7 @@ export function SecurityPage(): JSX.Element {
       <p />
       <p>
         <b>
-          20160113: <a href="https://twitter.com/merttasci_">Mert Taşçi</a>
+          2016/01/13: <a href="https://twitter.com/merttasci_">Mert Taşçi</a>
         </b>
       </p>
       <ul>
@@ -74,7 +78,7 @@ export function SecurityPage(): JSX.Element {
       <p />
       <p>
         <b>
-          20150907: <a href="http://www.s4ndeep.com">Sandeep Singh</a>
+          2015/09/07: <a href="http://www.s4ndeep.com">Sandeep Singh</a>
         </b>
       </p>
       <ul>
@@ -86,7 +90,7 @@ export function SecurityPage(): JSX.Element {
       <p />
       <p>
         <b>
-          20150904: <a href="http://twitter.com/umenmactech">Manish Bhattacharya</a>
+          2015/09/04: <a href="http://twitter.com/umenmactech">Manish Bhattacharya</a>
         </b>
       </p>
       <ul>
@@ -98,7 +102,7 @@ export function SecurityPage(): JSX.Element {
       <p />
       <p>
         <b>
-          20150827: <a href="http://twitter.com/chrismarlow9">Chris Marlow</a>
+          2015/08/27: <a href="http://twitter.com/chrismarlow9">Chris Marlow</a>
         </b>
       </p>
       <ul>
@@ -107,7 +111,7 @@ export function SecurityPage(): JSX.Element {
       <p />
       <p>
         <b>
-          20150624: <a href="http://stephensclafani.com">Stephen Sclafani</a>
+          2015/06/24: <a href="http://stephensclafani.com">Stephen Sclafani</a>
         </b>
       </p>
       <ul>
@@ -121,7 +125,7 @@ export function SecurityPage(): JSX.Element {
       </ul>
       <p />
       <p>
-        <b>20150302: Max Bond</b>
+        <b>2015/03/02: Max Bond</b>
       </p>
       <ul>
         <li>
@@ -134,7 +138,7 @@ export function SecurityPage(): JSX.Element {
       </ul>
       <p />
       <p>
-        <b>20141101: Ovidiu Toader</b>
+        <b>2014/11/01: Ovidiu Toader</b>
       </p>
       <ul>
         <li>
@@ -151,7 +155,7 @@ export function SecurityPage(): JSX.Element {
       </p>
       <p />
       <p>
-        <b>20141027: San Tran</b>
+        <b>2014/10/27: San Tran</b>
       </p>
       <ul>
         <li>
@@ -162,7 +166,7 @@ export function SecurityPage(): JSX.Element {
       <p />
       <p>
         <b>
-          20140501: <a href="https://titanous.com">Jonathan Rudenberg</a>
+          2014/05/01: <a href="https://titanous.com">Jonathan Rudenberg</a>
         </b>
       </p>
       <ul>
@@ -171,7 +175,7 @@ export function SecurityPage(): JSX.Element {
       <p />
       <p>
         <b>
-          20120801: <a href="http://louislang.com/">Louis Lang</a>
+          2012/08/01: <a href="http://louislang.com/">Louis Lang</a>
         </b>
       </p>
       <ul>
@@ -185,7 +189,7 @@ export function SecurityPage(): JSX.Element {
       <p />
       <p>
         <b>
-          20120720: <a href="http://www.tinfoilsecurity.com">Michael Borohovski</a>
+          2012/07/20: <a href="http://www.tinfoilsecurity.com">Michael Borohovski</a>
         </b>
       </p>
       <ul>
@@ -220,6 +224,8 @@ export function SecurityPage(): JSX.Element {
         name, please shoot us an email and we&#39;ll happily add you. We crawled through tons of
         emails trying to find all reports but inevitably missed some.
       </p>
+        </CardContent>
+      </Card>
     </NoticeLayout>
   );
 }

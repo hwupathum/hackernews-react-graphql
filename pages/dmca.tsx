@@ -1,16 +1,18 @@
+import { Card, CardContent, Typography } from '@material-ui/core';
 import Head from 'next/head';
 import * as React from 'react';
 import { withData } from '../src/helpers/with-data';
 
 import { BlankLayout } from '../src/layouts/blank-layout';
+import { MainLayout } from '../src/layouts/main-layout';
 
-const spanStyle = { fontSize: '11.5pt', fontFamily: 'Helvetica', color: '#444444' };
+const spanStyle = { };
 const paragraphStyle = { marginBottom: '7.5pt', lineHeight: 'normal', background: 'white' };
 const liStyle = {
-  color: '#444444',
+  // color: '#444444',
   marginBottom: '15.0pt',
-  lineHeight: 'normal',
-  background: 'white',
+  // lineHeight: 'normal',
+  // background: 'white',
 };
 const liSpanStyle = { fontSize: '10.5pt', fontFamily: 'Helvetica' };
 const paragraphStyle2 = {
@@ -25,11 +27,13 @@ const bSpanStyle = { fontSize: '13.5pt', fontFamily: 'Helvetica', color: '#44444
 
 export function DMCAPage(): JSX.Element {
   return (
-    <BlankLayout>
+    <MainLayout currentUrl="/">
+      <Card variant="outlined">
+        <CardContent>
       <p
         className="MsoNormal"
         style={{
-          marginBottom: '15.0pt',
+          // marginBottom: '15.0pt',
           lineHeight: 'normal',
           background: 'white',
         }}
@@ -50,11 +54,7 @@ export function DMCAPage(): JSX.Element {
           <b>Designated Agent</b>") is listed below.
         </span>
       </p>
-      <p className="MsoNormal" style={paragraphStyle}>
-        <b>
-          <span style={bSpanStyle}>Reporting Instances of Copyright Infringement:</span>
-        </b>
-      </p>
+      <Typography variant="h5">Reporting Instances of Copyright Infringement</Typography>
       <p className="MsoNormal" style={paragraphStyle2}>
         <span style={spanStyle}>
           If you believe that content residing or accessible on or through the our website
@@ -114,11 +114,8 @@ export function DMCAPage(): JSX.Element {
           notifications.
         </span>
       </p>
-      <p className="MsoNormal" style={paragraphStyle}>
-        <b>
-          <span style={bSpanStyle}>Submitting a DMCA Counter-Notification:</span>
-        </b>
-      </p>
+      <Typography variant="h5">Submitting a DMCA Counter-Notification</Typography>
+
       <p className="MsoNormal" style={paragraphStyle2}>
         <span style={spanStyle}>
           If you believe you are the wrongful subject of a DMCA notification, you may file a
@@ -166,11 +163,7 @@ export function DMCAPage(): JSX.Element {
           material to the Services.
         </span>
       </p>
-      <p className="MsoNormal" style={paragraphStyle}>
-        <b>
-          <span style={bSpanStyle}>Designated Agent</span>
-        </b>
-      </p>
+      <Typography variant="h5">Designated Agent</Typography>
       <p className="MsoNormal" style={paragraphStyle2}>
         <span style={spanStyle}>
           Y Combinator
@@ -179,12 +172,11 @@ export function DMCAPage(): JSX.Element {
           <br />
           <b>Attn:</b> Copyright Agent; Legal <br />
           <b>Fax:</b> 650.360.3189
-          <br />
-          <br />
         </span>
       </p>
       <p className="MsoNormal">&nbsp;</p>
-    </BlankLayout>
+      </CardContent></Card>
+    </MainLayout>
   );
 }
 

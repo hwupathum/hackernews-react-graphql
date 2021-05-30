@@ -1,3 +1,4 @@
+import { Button, Card, CardContent, Typography } from '@material-ui/core';
 import Link from 'next/link';
 import * as React from 'react';
 import { withData } from '../src/helpers/with-data';
@@ -7,10 +8,11 @@ import { NoticeLayout } from '../src/layouts/notice-layout';
 export function BookmarkletPage(props): JSX.Element {
   return (
     <NoticeLayout>
-      <b>Bookmarklet</b>
-      <br />
-      <br />
-      <div id="main">
+      <Card variant="outlined">
+        <CardContent>
+          <Typography variant="h5">Bookmarklet</Typography>
+          <br />
+
         <p id="first">
           Thanks to Phil Kast for writing this bookmarklet for submitting links to{' '}
           <Link href="/">
@@ -22,29 +24,16 @@ export function BookmarkletPage(props): JSX.Element {
           <br />
         </p>
         <div style={{ textAlign: 'center' }}>
-          <a
-            style={{ color: '#777', fontSize: '2em' }}
+          <Link
             href="javascript:window.location=%22http://news.ycombinator.com/submitlink?u=%22+encodeURIComponent(document.location)+%22&amp;t=%22+encodeURIComponent(document.title)"
           >
-            post to HN
-          </a>
+            <Button variant='contained' color='primary' style={{ fontWeight: 600, color: 'white' }}>
+            Post to HN
+            </Button>
+          </Link>
         </div>
-        <br />
-        <br />
-        <table style={{ padding: '0px', backgroundColor: '#ff6600', width: '100%' }}>
-          <tbody>
-            <tr style={{ height: '0px' }}>
-              <td style={{ padding: '0px' }} />
-            </tr>
-          </tbody>
-        </table>
-        <p style={{ textAlign: 'center' }}>
-          <span className="foot">
-            <br />
-            <br />
-          </span>
-        </p>
-      </div>
+      </CardContent>
+      </Card>
     </NoticeLayout>
   );
 }

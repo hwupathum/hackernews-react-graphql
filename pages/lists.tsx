@@ -1,3 +1,4 @@
+import { Card, CardContent, Typography } from '@material-ui/core';
 import Link from 'next/link';
 import * as React from 'react';
 
@@ -9,6 +10,10 @@ export function ListsPage(props): JSX.Element {
 
   return (
     <MainLayout currentUrl={router.pathname}>
+      <Card variant="outlined">
+        <CardContent>
+          <Typography variant="h5">Hacker News Lists</Typography>
+          <br />
       <tr>
         <td>
           <table style={{ borderSpacing: '7px 0px' }}>
@@ -16,7 +21,7 @@ export function ListsPage(props): JSX.Element {
               <tr>
                 <td>
                   <Link href="/leaders">
-                    <a>leaders</a>
+                    <b><a>leaders</a></b>
                   </Link>
                 </td>
                 <td>Users with most karma.</td>
@@ -24,7 +29,7 @@ export function ListsPage(props): JSX.Element {
               <tr>
                 <td>
                   <Link href="/front">
-                    <a>front</a>
+                    <b><a>front</a></b>
                   </Link>
                 </td>
                 <td>
@@ -35,7 +40,7 @@ export function ListsPage(props): JSX.Element {
               <tr>
                 <td>
                   <Link href="/best">
-                    <a>best</a>
+                    <b><a>best</a></b>
                   </Link>
                 </td>
                 <td>Highest-voted recent links.</td>
@@ -43,7 +48,7 @@ export function ListsPage(props): JSX.Element {
               <tr>
                 <td>
                   <Link href="/active">
-                    <a>active</a>
+                    <b><a>active</a></b>
                   </Link>
                 </td>
                 <td>Most active current discussions.</td>
@@ -51,7 +56,7 @@ export function ListsPage(props): JSX.Element {
               <tr>
                 <td>
                   <Link href="/bestcomments">
-                    <a>bestcomments</a>
+                    <b><a>bestcomments</a></b>
                   </Link>
                 </td>
                 <td>Highest-voted recent comments.</td>
@@ -59,7 +64,7 @@ export function ListsPage(props): JSX.Element {
               <tr>
                 <td>
                   <Link href="/noobstories">
-                    <a>noobstories</a>
+                    <b><a>noobstories</a></b>
                   </Link>
                 </td>
                 <td>Submissions from new accounts.</td>
@@ -67,7 +72,7 @@ export function ListsPage(props): JSX.Element {
               <tr>
                 <td>
                   <Link href="/noobcomments">
-                    <a>noobcomments</a>
+                    <b><a>noobcomments</a></b>
                   </Link>
                 </td>
                 <td>Comments from new accounts.</td>
@@ -76,6 +81,7 @@ export function ListsPage(props): JSX.Element {
           </table>
         </td>
       </tr>
+      </CardContent></Card>
     </MainLayout>
   );
 }

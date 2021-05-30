@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/client';
+import { Button, Card, CardContent, Grid, TextField, Typography } from '@material-ui/core';
 import Link from 'next/link';
 import Router, { NextRouter } from 'next/router';
 import React, { useState } from 'react';
@@ -30,6 +31,8 @@ function LoginPage(props: ILoginPageProps): JSX.Element {
   const [registerPassword, setRegisterPassword] = useState<string>('');
   const [validationMessage, setValidationMessage] = useState<string>('');
 
+  const [login, setLogin] = useState(true)
+
   const validateLogin = (e: React.FormEvent<HTMLFormElement>): void => {
     if (data?.me) {
       e.preventDefault();
@@ -60,96 +63,106 @@ function LoginPage(props: ILoginPageProps): JSX.Element {
 
   return (
     <BlankLayout>
-      {message && <p>{message}</p>}
-      {validationMessage && <p>{validationMessage}</p>}
-      <b>Login</b>
-      <br />
-      <br />
-      <form
-        method="post"
-        action="/login"
-        onSubmit={(e): void => validateLogin(e)}
-        style={{ marginBottom: '1em' }}
-      >
-        <input type="hidden" name="goto" value={routerQuery.goto || 'news'} />
-        <table style={{ border: '0px' }}>
-          <tbody>
-            <tr>
-              <td>username:</td>
-              <td>
-                <input
+      <Card variant="outlined" style={{ margin: 'auto', marginTop: 10, maxWidth: 400 }}>
+        <CardContent>
+          {message && <p>{message}</p>}
+          {validationMessage && <p>{validationMessage}</p>}
+          {login && <form
+            method="post"
+            action="/login"
+            onSubmit={(e): void => validateLogin(e)}
+            style={{ marginBottom: '1em' }}
+          >
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <Typography variant="h5">
+                  Login
+                </Typography>
+              </Grid>
+              <input type="hidden" name="goto" value={routerQuery.goto || 'news'} />
+              <Grid item xs={12}>
+                <TextField
                   autoCapitalize="off"
                   autoCorrect="off"
                   name="id"
                   onChange={(e): void => setLoginId(e.target.value)}
-                  size={20}
+                  fullWidth
                   spellCheck={false}
                   type="text"
+                  label="Username"
+                  variant="outlined"
                 />
-              </td>
-            </tr>
-            <tr>
-              <td>password:</td>
-              <td>
-                <input
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
                   type="password"
                   name="password"
                   onChange={(e): void => setLoginPassword(e.target.value)}
-                  size={20}
+                  variant="outlined"
+                  label="Password"
+                  fullWidth
                 />
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <br />
-        <input type="submit" value="login" />
-      </form>
-      <Link href="/forgot">
-        <a>Forgot your password?</a>
-      </Link>
-      <br />
-      <br />
-      <b>Create Account</b>
-      <br />
-      <br />
-      <form
-        method="post"
-        action="/register"
-        onSubmit={(e): void => validateRegister(e)}
-        style={{ marginBottom: '1em' }}
-      >
-        <table style={{ border: '0px' }}>
-          <tbody>
-            <tr>
-              <td>username:</td>
-              <td>
-                <input
+              </Grid>
+              <Grid item xs={12}>
+                <Button type="submit" color="primary" variant="contained" style={{ fontSize: '0.8rem', fontWeight: 600, color: 'white' }} fullWidth>Login</Button>
+              </Grid>
+              <Grid item xs={12}>
+                <Button color="primary" variant="outlined" style={{ fontSize: '0.8rem', fontWeight: 600 }} fullWidth onClick={() => setLogin(false)}>Sign Up</Button>
+              </Grid>
+              <Grid item xs={12}>
+                <Typography variant="caption">
+                  <Link href="/forgot">
+                    Forgot your password?
+                </Link>
+                </Typography>
+              </Grid>
+            </Grid>
+          </form>}
+          {!login && <form
+            method="post"
+            action="/register"
+            onSubmit={(e): void => validateRegister(e)}
+            style={{ marginBottom: '1em' }}
+          >
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <Typography variant="h5">
+                  Create Account
+                </Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
                   type="text"
                   name="id"
                   onChange={(e): void => setRegisterId(e.target.value)}
-                  size={20}
                   autoCorrect="off"
                   spellCheck={false}
                   autoCapitalize="off"
+                  label="Username"
+                  fullWidth
+                  variant="outlined"
                 />
-              </td>
-            </tr>
-            <tr>
-              <td>password:</td>
-              <td>
-                <input
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
                   type="password"
                   name="password"
                   onChange={(e): void => setRegisterPassword(e.target.value)}
-                  size={20}
+                  label="Password"
+                  variant="outlined"
+                  fullWidth
                 />
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <br />
-        <input type="submit" value="create account" />
-      </form>
+              </Grid>
+              <Grid item xs={12}>
+                <Button type="submit" color="primary" variant="contained" style={{ fontSize: '0.8rem', fontWeight: 600, color: 'white' }} fullWidth>Sign up</Button>
+              </Grid>
+              <Grid item xs={12}>
+                <Button color="primary" variant="outlined" style={{ fontSize: '0.8rem', fontWeight: 600 }} fullWidth onClick={() => setLogin(true)}>Login</Button>
+              </Grid>
+            </Grid>
+          </form>}
+        </CardContent>
+      </Card>
     </BlankLayout>
   );
 }

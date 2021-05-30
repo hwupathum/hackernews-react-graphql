@@ -1,3 +1,4 @@
+import { Card, CardContent, Typography } from '@material-ui/core';
 import Link from 'next/link';
 import * as React from 'react';
 import { withData } from '../src/helpers/with-data';
@@ -7,9 +8,11 @@ import { NoticeLayout } from '../src/layouts/notice-layout';
 export function ShowHNRulesPage(): JSX.Element {
   return (
     <NoticeLayout>
-      <b>Show HN</b>
-      <br />
-      <br />
+      <Card variant="outlined">
+        <CardContent>
+          <Typography variant="h5">Show HN</Typography>
+          <br />
+
       <p>Show HN is a way to share something that you've made on Hacker News.</p>
       <p>
         The current Show HNs can be found via{' '}
@@ -61,23 +64,7 @@ export function ShowHNRulesPage(): JSX.Element {
         When something isn't good, you needn't pretend that it is. But don't be gratuitously
         negative.
       </p>
-      <p>
-        <br />
-        <br />
-        <table style={{ padding: '0px', backgroundColor: '#ff6600', width: '100%' }}>
-          <tbody>
-            <tr style={{ height: '0px' }}>
-              <td style={{ padding: '0px' }} />
-            </tr>
-          </tbody>
-        </table>
-      </p>
-      <p>
-        <span className="foot">
-          <br />
-          <br />
-        </span>
-      </p>
+</CardContent></Card>
     </NoticeLayout>
   );
 }

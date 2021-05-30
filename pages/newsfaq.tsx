@@ -1,3 +1,4 @@
+import { Card, CardContent, Typography } from '@material-ui/core';
 import Link from 'next/link';
 import * as React from 'react';
 import { withData } from '../src/helpers/with-data';
@@ -7,9 +8,10 @@ import { NoticeLayout } from '../src/layouts/notice-layout';
 export function NewsFaqPage(): JSX.Element {
   return (
     <NoticeLayout>
-      <b>Hacker News FAQ</b>
-      <br />
-      <br />
+      <Card variant="outlined">
+        <CardContent>
+          <Typography variant="h5">Hacker News FAQ</Typography>
+          <br />
       <b>Are there rules about submissions and comments?</b>
       <p>
         <Link href="/newsguidelines">
@@ -176,24 +178,7 @@ export function NewsFaqPage(): JSX.Element {
         </Link>{' '}
         works most of the time.
       </p>
-      <p>
-        <br />
-        <br />
-        <br />
-        <table style={{ padding: '0px', backgroundColor: '#ff6600', width: '100%' }}>
-          <tbody>
-            <tr style={{ height: '0px' }}>
-              <td style={{ padding: '0px' }} />
-            </tr>
-          </tbody>
-        </table>
-      </p>
-      <p>
-        <span className="foot">
-          <br />
-          <br />
-        </span>
-      </p>
+      </CardContent></Card>
     </NoticeLayout>
   );
 }
