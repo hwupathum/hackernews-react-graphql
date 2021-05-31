@@ -7,8 +7,9 @@
   },
   "scripts": {
     "clean": "rm -rf dist && rm -rf ./.next",
-    "build:pre": "npm run clean && next build && tsc --project tsconfig-server.json",
-    "build": "cross-env NODE_ENV=production npm run build:pre",
+    "build:dev": "npm run clean && next build && tsc --project tsconfig-server.json",
+    "build": "cross-env NODE_ENV=production npm run build:dev",
+    "start:dev": "nodemon",
     "start": "cross-env NODE_ENV=production node dist/server/server.js"
   },
   "author": "Clinton D'Annolfo",
