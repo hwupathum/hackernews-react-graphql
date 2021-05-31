@@ -6,7 +6,9 @@
     "node": ">=14.16.0"
   },
   "scripts": {
-    "build": "cross-env NODE_ENV=production npm run build",
+    "clean": "rm -rf dist && rm -rf ./.next",
+    "build:pre": "npm run clean && next build && tsc --project tsconfig-server.json",
+    "build": "cross-env NODE_ENV=production npm run build:pre",
     "start": "cross-env NODE_ENV=production node dist/server/server.js"
   },
   "author": "Clinton D'Annolfo",
