@@ -6,22 +6,8 @@
     "node": ">=14.16.0"
   },
   "scripts": {
-    "clean": "rm -rf dist && rm -rf ./.next",
-    "build": "npm run clean && next build && tsc --project tsconfig-server.json",
-    "build:docker": "docker build --tag 'clintonwoo/hackernews-react-graphql:latest' --rm . && docker run --rm -p 80:3000 --name hackernews-react-graphql clintonwoo/hackernews-react-graphql",
-    "build:prod": "cross-env NODE_ENV=production npm run build",
-    "build:static-website": "rm -rf build/static && cross-env NODE_ENV=production next build && next export -o build/static",
-    "debug": "cross-env DEBUG=app:* npm start",
-    "debug:all": "cross-env DEBUG=* npm start",
-    "debug:inspect": "cross-env DEBUG=app* TS_NODE_COMPILER_OPTIONS={\\\"module\\\":\\\"commonjs\\\"} node --inspect -r ts-node/register server/server.ts --project tsconfig-server.json",
-    "debug:inspect-prod": "cross-env DEBUG=app* NODE_ENV=production node --inspect dist/server/server.js",
-    "lint": "eslint \"src/**/*.ts?(x)\" --ext .js,.jsx,.ts,.tsx",
-    "prettier:check": "prettier --check .",
-    "prettier:format": "prettier --write .",
-    "test": "jest --runInBand --config jest.config.js",
-    "tsc:check": "tsc --noEmit",
-    "start": "nodemon",
-    "start:prod": "cross-env NODE_ENV=production node dist/server/server.js"
+    "build": "cross-env NODE_ENV=production npm run build",
+    "start": "cross-env NODE_ENV=production node dist/server/server.js"
   },
   "author": "Clinton D'Annolfo",
   "license": "Apache-2.0",
