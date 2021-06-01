@@ -13,7 +13,8 @@ export interface IHeaderProps {
   blank?: boolean
 }
 
-const SpeechRegocnition = window.SpeechRecognition || window.webkitSpeechRecognition
+const {webkitSpeechRecognition}  = (window as any);
+const SpeechRegocnition = SpeechRecognition || webkitSpeechRecognition
 const mic = new SpeechRegocnition()
 
 mic.continuous = true
