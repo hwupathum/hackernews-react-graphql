@@ -1,3 +1,4 @@
+// @ts-nocheck
 import Link from 'next/link';
 import React from 'react'
 import { AppBar, Grid, Typography, Toolbar, Button, Hidden, IconButton, Popover, Paper, TextField } from '@material-ui/core';
@@ -13,13 +14,7 @@ export interface IHeaderProps {
   blank?: boolean
 }
 
-const {webkitSpeechRecognition}  = (window as any);
-const SpeechRegocnition = SpeechRecognition || webkitSpeechRecognition
-const mic = new SpeechRegocnition()
 
-mic.continuous = true
-mic.interimResults = true
-mic.lang = 'en-US'
 
 export function Header(props: IHeaderProps): JSX.Element {
   const { currentUrl, isNavVisible, me, title, blank = false } = props;
@@ -31,33 +26,43 @@ export function Header(props: IHeaderProps): JSX.Element {
     handleListen()
   }, [isListening])
 
-  const handleListen = () => {
-    if (isListening) {
-      mic.start()
-      mic.onend = () => {
-        console.log('Continue..')
-        mic.start
+  let handleListen = () => {}
+
+  if (typeof window !== "undefined") {
+    const SpeechRegocnition = window.SpeechRecognition || window.webkitSpeechRecognition
+    const mic = new SpeechRegocnition()
+    mic.continuous = true
+    mic.interimResults = true
+    mic.lang = 'en-US'
+    handleListen = () => {
+      if (isListening) {
+        mic.start()
+        mic.onend = () => {
+          console.log('Continue..')
+          mic.start
+        }
+      } else {
+        mic.stop()
+        mic.onend = () => {
+          console.log('Stopped mic on Click')
+        }
       }
-    } else {
-      mic.stop()
-      mic.onend = () => {
-        console.log('Stopped mic on Click')
+      mic.onstart = () => {
+        console.log('Mics on')
       }
-    }
-    mic.onstart = () => {
-      console.log('Mics on')
-    }
-    mic.onresult = event => {
-      const transcript = Array.from(event.results)
-        .map(result => result[0])
-        .map(result => result.transcript)
-        .join('')
-      setNote(transcript)
-      mic.onerror = event => {
-        console.log(event.error)
+      mic.onresult = event => {
+        const transcript = Array.from(event.results)
+          .map((result: any) => result[0])
+          .map(result => result.transcript)
+          .join('')
+        setNote(transcript)
+        mic.onerror = event => {
+          console.log(event.error)
+        }
       }
     }
   }
+  
 
   return (
     <React.Fragment>
