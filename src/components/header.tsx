@@ -2,10 +2,8 @@ import Link from 'next/link';
 import React from 'react'
 import { AppBar, Grid, Typography, Toolbar, Button, Hidden, IconButton, Popover, Paper, TextField } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import { HeaderNav } from './header-nav';
-import { Search } from '@material-ui/icons';
+import { Mic, MicOff, Search } from '@material-ui/icons';
 
 export interface IHeaderProps {
   me: { id: string; karma: number } | undefined;
@@ -15,9 +13,50 @@ export interface IHeaderProps {
   blank?: boolean
 }
 
+const SpeechRegocnition = window.SpeechRecognition || window.webkitSpeechRecognition
+const mic = new SpeechRegocnition()
+
+mic.continuous = true
+mic.interimResults = true
+mic.lang = 'en-US'
+
 export function Header(props: IHeaderProps): JSX.Element {
   const { currentUrl, isNavVisible, me, title, blank = false } = props;
   const [showMenu, setShowMenu] = React.useState(false)
+  const [isListening, setIslistening] = React.useState(false)
+  const [note, setNote] = React.useState('')
+
+  React.useEffect(() => {
+    handleListen()
+  }, [isListening])
+
+  const handleListen = () => {
+    if (isListening) {
+      mic.start()
+      mic.onend = () => {
+        console.log('Continue..')
+        mic.start
+      }
+    } else {
+      mic.stop()
+      mic.onend = () => {
+        console.log('Stopped mic on Click')
+      }
+    }
+    mic.onstart = () => {
+      console.log('Mics on')
+    }
+    mic.onresult = event => {
+      const transcript = Array.from(event.results)
+        .map(result => result[0])
+        .map(result => result.transcript)
+        .join('')
+      setNote(transcript)
+      mic.onerror = event => {
+        console.log(event.error)
+      }
+    }
+  }
 
   return (
     <React.Fragment>
@@ -61,8 +100,11 @@ export function Header(props: IHeaderProps): JSX.Element {
                       type="text"
                       name="q"
                       InputProps={{
-                        startAdornment: <Search color="disabled"/>
+                        startAdornment: <Search color="disabled" />
                       }}
+                      value={note}
+                      onChange={event => setNote(event.target.value)}
+                      style={{ maxWidth: 200 }}
                       placeholder="Search"
                       variant="outlined"
                       size="small"
@@ -71,6 +113,9 @@ export function Header(props: IHeaderProps): JSX.Element {
                       autoCapitalize="off"
                       autoComplete="false"
                     />
+                    <IconButton onClick={() => setIslistening(prevState => !prevState)}>
+                      {isListening ? <MicOff /> : <Mic />}
+                    </IconButton>
                   </form>
                 </Grid>}
                 {!blank && isNavVisible ? me ? (
@@ -111,7 +156,7 @@ export function Header(props: IHeaderProps): JSX.Element {
                   type="text"
                   name="q"
                   InputProps={{
-                    startAdornment: <Search color="disabled"/>
+                    startAdornment: <Search color="disabled" />
                   }}
                   fullWidth
                   placeholder="Search"
@@ -122,6 +167,9 @@ export function Header(props: IHeaderProps): JSX.Element {
                   autoCapitalize="off"
                   autoComplete="false"
                 />
+                <IconButton onClick={() => setIslistening(prevState => !prevState)}>
+                  {isListening ? <MicOff /> : <Mic />}
+                </IconButton>
               </form>
             </div>
             <div style={{ margin: '12px 16px' }}>
